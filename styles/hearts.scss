@@ -1,0 +1,180 @@
+$card-height: 96px;
+$card-width: 71px;
+
+body {
+  background-color: #808080;
+}
+
+.card {
+  background-image: url(../images/StandardDeck.png);
+  width: $card-width;
+  height: $card-height;
+  display: inline-block;
+
+  &.down {
+    background-position: $card-width*-2-2 $card-height*-4-4;
+  }
+
+  &.club-ace {
+    background-position: 0 0;
+  }
+  &.club-2 {
+    background-position: $card-width*-1-1 0;
+  }
+  &.club-3 {
+    background-position: $card-width*-2-2 0;
+  }
+  &.club-4 {
+    background-position: $card-width*-3-3 0;
+  }
+  &.club-5 {
+    background-position: $card-width*-4-4 0;
+  }
+  &.club-6 {
+    background-position: $card-width*-5-5 0;
+  }
+  &.club-7 {
+    background-position: $card-width*-6-6 0;
+  }
+  &.club-8 {
+    background-position: $card-width*-7-7 0;
+  }
+  &.club-9 {
+    background-position: $card-width*-8-8 0;
+  }
+  &.club-10 {
+    background-position: $card-width*-9-9 0;
+  }
+  &.club-jack {
+    background-position: $card-width*-10-10 0;
+  }
+  &.club-queen {
+    background-position: $card-width*-11-11 0;
+  }
+  &.club-king {
+    background-position: $card-width*-12-12 0;
+  }
+
+  &.diamond-ace {
+    background-position: 0 $card-height*-1-1;
+  }
+  &.diamond-2 {
+    background-position: $card-width*-1-1 $card-height*-1-1;
+  }
+  &.diamond-3 {
+    background-position: $card-width*-2-2 $card-height*-1-1;
+  }
+  &.diamond-4 {
+    background-position: $card-width*-3-3 $card-height*-1-1;
+  }
+  &.diamond-5 {
+    background-position: $card-width*-4-4 $card-height*-1-1;
+  }
+  &.diamond-6 {
+    background-position: $card-width*-5-5 $card-height*-1-1;
+  }
+  &.diamond-7 {
+    background-position: $card-width*-6-6 $card-height*-1-1;
+  }
+  &.diamond-8 {
+    background-position: $card-width*-7-7 $card-height*-1-1;
+  }
+  &.diamond-9 {
+    background-position: $card-width*-8-8 $card-height*-1-1;
+  }
+  &.diamond-10 {
+    background-position: $card-width*-9-9 $card-height*-1-1;
+  }
+  &.diamond-jack {
+    background-position: $card-width*-10-10 $card-height*-1-1;
+  }
+  &.diamond-queen {
+    background-position: $card-width*-11-11 $card-height*-1-1;
+  }
+  &.diamond-king {
+    background-position: $card-width*-12-12 $card-height*-1-1;
+  }
+
+  &.heart-ace {
+    background-position: 0 $card-height*-2-2;
+  }
+  &.heart-2 {
+    background-position: $card-width*-1-1 $card-height*-2-2;
+  }
+  &.heart-3 {
+    background-position: $card-width*-2-2 $card-height*-2-2;
+  }
+  &.heart-4 {
+    background-position: $card-width*-3-3 $card-height*-2-2;
+  }
+  &.heart-5 {
+    background-position: $card-width*-4-4 $card-height*-2-2;
+  }
+  &.heart-6 {
+    background-position: $card-width*-5-5 $card-height*-2-2;
+  }
+  &.heart-7 {
+    background-position: $card-width*-6-6 $card-height*-2-2;
+  }
+  &.heart-8 {
+    background-position: $card-width*-7-7 $card-height*-2-2;
+  }
+  &.heart-9 {
+    background-position: $card-width*-8-8 $card-height*-2-2;
+  }
+  &.heart-10 {
+    background-position: $card-width*-9-9 $card-height*-2-2;
+  }
+  &.heart-jack {
+    background-position: $card-width*-10-10 $card-height*-2-2;
+  }
+  &.heart-queen {
+    background-position: $card-width*-11-11 $card-height*-2-2;
+  }
+  &.heart-king {
+    background-position: $card-width*-12-12 $card-height*-2-2;
+  }
+
+  &.spade-ace {
+    background-position: 0 $card-height*-3-3;
+  }
+  &.spade-2 {
+    background-position: $card-width*-1-1 $card-height*-3-3;
+  }
+  &.spade-3 {
+    background-position: $card-width*-2-2 $card-height*-3-3;
+  }
+  &.spade-4 {
+    background-position: $card-width*-3-3 $card-height*-3-3;
+  }
+  &.spade-5 {
+    background-position: $card-width*-4-4 $card-height*-3-3;
+  }
+  &.spade-6 {
+    background-position: $card-width*-5-5 $card-height*-3-3;
+  }
+  &.spade-7 {
+    background-position: $card-width*-6-6 $card-height*-3-3;
+  }
+  &.spade-8 {
+    background-position: $card-width*-7-7 $card-height*-3-3;
+  }
+  &.spade-9 {
+    background-position: $card-width*-8-8 $card-height*-3-3;
+  }
+  &.spade-10 {
+    background-position: $card-width*-9-9 $card-height*-3-3;
+  }
+  &.spade-jack {
+    background-position: $card-width*-10-10 $card-height*-3-3;
+  }
+  &.spade-queen {
+    background-position: $card-width*-11-11 $card-height*-3-3;
+  }
+  &.spade-king {
+    background-position: $card-width*-12-12 $card-height*-3-3;
+  }
+
+}
+
+/* 168x242 */
