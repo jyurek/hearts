@@ -1,4 +1,13 @@
-module Card (Model, init, Action, update, view, Orientation(..), Value(..), Suit(..)) where
+module Card
+  ( Card
+  , init
+  , view
+  , update
+  , Suit(..)
+  , Value(..)
+  , Face(..)
+  , Action
+  ) where
 
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
@@ -8,9 +17,9 @@ import String exposing (toLower)
 
 type Suit = Spades | Hearts | Clubs | Diamonds
 type Value = Ace | King | Queen | Jack | Value Int
-type Orientation = Up | Down
-type alias Model =
-  { orientation : Orientation
+type Face = Up | Down
+type alias Card =
+  { face : Face
   , value : Value
   , suit : Suit
   }
@@ -24,9 +33,9 @@ valueString v =
     Jack -> "jack"
     Value i -> toString i
 
-init : Orientation -> Value -> Suit -> Model
-init o v s =
-  { orientation = o
+init : Face -> Value -> Suit -> Card
+init f v s =
+  { face = f
   , value = v
   , suit = s
   }
@@ -36,30 +45,33 @@ init o v s =
 type Action
     = Flip
 
-update : Action -> Model -> Model
+update : Action -> Card -> Card
 update action model =
   case action of
     Flip ->
-      { model | orientation = flipOver model.orientation }
+      { model | face = flipOver model.face }
 
-flipOver : Orientation -> Orientation
-flipOver o =
-  case o of
+flipOver : Face -> Face
+flipOver f =
+  case f of
     Up -> Down
     Down -> Up
 
 -- VIEW
 
-view : Signal.Address Action -> Model -> Html
+view : Signal.Address Action -> Card -> Html
 view address model =
   div
     [ toClass model |> class ]
     [ text "" ]
 
-toClass : Model -> String
+toClass : Card -> String
 toClass model =
-  case model.orientation of
+  case model.face of
     Up ->
-      "card " ++ (model.suit |> toString |> toLower) ++ "-" ++ (model.value |> valueString)
+      "card "
+      ++ (model.suit |> toString |> toLower)
+      ++ "-"
+      ++ (model.value |> valueString)
     Down ->
       "card down"

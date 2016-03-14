@@ -1,26 +1,35 @@
-module Hand (Model, init, Action, update, view) where
+module Hand
+  ( init
+  , update
+  , view
+  )
+  where
 
-import Card exposing (Card, Orientation, Value, Suit)
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (class)
+import Card exposing (Card)
+import Html exposing (..)
+import Html.Attributes exposing (..)
 
 -- MODEL
 
-type alias Model = [Card]
+type alias Hand = List Card
 
-init : [Card] -> Model
-init = id
+init : List Card -> Hand
+init = identity
 
 -- UPDATE
 
-type Action = Noop
+type Action =
+  Noop
+  | CardAction Card.Action
 
-update : Action -> Model -> Model
+update : Action -> Hand -> Hand
 update action model =
   case action of
+    CardAction act -> List.map (Card.update act) model
     Noop -> model
 
 -- VIEW
 
-view : Signal.Address Action -> Model -> Model
-view address model =
+view : Signal.Address Action -> Hand -> Html
+view address hand =
+  div [] (List.map (Card.view (Signal.forwardTo address CardAction)) hand)

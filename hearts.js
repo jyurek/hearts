@@ -10270,7 +10270,7 @@ Elm.Card.make = function (_elm) {
    $String = Elm.String.make(_elm);
    var _op = {};
    var Flip = {ctor: "Flip"};
-   var init = F3(function (o,v,s) {    return {orientation: o,value: v,suit: s};});
+   var init = F3(function (f,v,s) {    return {face: f,value: v,suit: s};});
    var valueString = function (v) {
       var _p0 = v;
       switch (_p0.ctor)
@@ -10281,7 +10281,7 @@ Elm.Card.make = function (_elm) {
          default: return $Basics.toString(_p0._0);}
    };
    var toClass = function (model) {
-      var _p1 = model.orientation;
+      var _p1 = model.face;
       if (_p1.ctor === "Up") {
             return A2($Basics._op["++"],
             "card ",
@@ -10291,11 +10291,11 @@ Elm.Card.make = function (_elm) {
          }
    };
    var view = F2(function (address,model) {    return A2($Html.div,_U.list([$Html$Attributes.$class(toClass(model))]),_U.list([$Html.text("")]));});
-   var Model = F3(function (a,b,c) {    return {orientation: a,value: b,suit: c};});
+   var Card = F3(function (a,b,c) {    return {face: a,value: b,suit: c};});
    var Down = {ctor: "Down"};
    var Up = {ctor: "Up"};
-   var flipOver = function (o) {    var _p2 = o;if (_p2.ctor === "Up") {    return Down;} else {    return Up;}};
-   var update = F2(function (action,model) {    var _p3 = action;return _U.update(model,{orientation: flipOver(model.orientation)});});
+   var flipOver = function (f) {    var _p2 = f;if (_p2.ctor === "Up") {    return Down;} else {    return Up;}};
+   var update = F2(function (action,model) {    var _p3 = action;return _U.update(model,{face: flipOver(model.face)});});
    var Value = function (a) {    return {ctor: "Value",_0: a};};
    var Jack = {ctor: "Jack"};
    var Queen = {ctor: "Queen"};
@@ -10307,20 +10307,49 @@ Elm.Card.make = function (_elm) {
    var Spades = {ctor: "Spades"};
    return _elm.Card.values = {_op: _op
                              ,init: init
-                             ,update: update
                              ,view: view
-                             ,Model: Model
-                             ,Up: Up
-                             ,Down: Down
+                             ,update: update
+                             ,Card: Card
+                             ,Spades: Spades
+                             ,Hearts: Hearts
+                             ,Clubs: Clubs
+                             ,Diamonds: Diamonds
                              ,Ace: Ace
                              ,King: King
                              ,Queen: Queen
                              ,Jack: Jack
                              ,Value: Value
-                             ,Spades: Spades
-                             ,Hearts: Hearts
-                             ,Clubs: Clubs
-                             ,Diamonds: Diamonds};
+                             ,Up: Up
+                             ,Down: Down};
+};
+Elm.Hand = Elm.Hand || {};
+Elm.Hand.make = function (_elm) {
+   "use strict";
+   _elm.Hand = _elm.Hand || {};
+   if (_elm.Hand.values) return _elm.Hand.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Card = Elm.Card.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      if (_p0.ctor === "CardAction") {
+            return A2($List.map,$Card.update(_p0._0),model);
+         } else {
+            return model;
+         }
+   });
+   var CardAction = function (a) {    return {ctor: "CardAction",_0: a};};
+   var view = F2(function (address,hand) {    return A2($Html.div,_U.list([]),A2($List.map,$Card.view(A2($Signal.forwardTo,address,CardAction)),hand));});
+   var Noop = {ctor: "Noop"};
+   var init = $Basics.identity;
+   return _elm.Hand.values = {_op: _op,init: init,update: update,view: view};
 };
 Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
@@ -10331,12 +10360,25 @@ Elm.Main.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Card = Elm.Card.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $Hand = Elm.Hand.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm),
    $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
    var _op = {};
-   var main = $StartApp$Simple.start({model: A3($Card.init,$Card.Up,$Card.Value(5),$Card.Spades),update: $Card.update,view: $Card.view});
+   var main = $StartApp$Simple.start({model: $Hand.init(_U.list([A3($Card.init,$Card.Up,$Card.Value(5),$Card.Spades)
+                                                                ,A3($Card.init,$Card.Up,$Card.King,$Card.Diamonds)
+                                                                ,A3($Card.init,$Card.Down,$Card.Value(2),$Card.Hearts)
+                                                                ,A3($Card.init,$Card.Up,$Card.Value(2),$Card.Hearts)
+                                                                ,A3($Card.init,$Card.Up,$Card.Value(3),$Card.Hearts)
+                                                                ,A3($Card.init,$Card.Up,$Card.Value(4),$Card.Hearts)
+                                                                ,A3($Card.init,$Card.Up,$Card.King,$Card.Spades)
+                                                                ,A3($Card.init,$Card.Up,$Card.Ace,$Card.Clubs)
+                                                                ,A3($Card.init,$Card.Up,$Card.Jack,$Card.Hearts)
+                                                                ,A3($Card.init,$Card.Up,$Card.Queen,$Card.Diamonds)
+                                                                ,A3($Card.init,$Card.Up,$Card.Value(10),$Card.Clubs)]))
+                                     ,update: $Hand.update
+                                     ,view: $Hand.view});
    return _elm.Main.values = {_op: _op,main: main};
 };
