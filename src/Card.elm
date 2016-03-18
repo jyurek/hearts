@@ -1,18 +1,9 @@
 module Card where
-  -- ( Card
-  -- , init
-  -- , view
-  -- , update
-  -- , Suit(..)
-  -- , Value(..)
-  -- , Face(..)
-  -- , Action
-  -- ) where
 
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
-import String exposing (toLower)
+import String
 
 -- MODEL
 
@@ -76,7 +67,7 @@ toClass model =
   case model.face of
     Up ->
       "card "
-      ++ (model.suit |> toString |> toLower)
+      ++ (model.suit |> toString |> String.toLower)
       ++ "-"
       ++ (model.value |> valueString)
     Down ->

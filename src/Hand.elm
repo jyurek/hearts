@@ -1,13 +1,7 @@
-module Hand
-  ( init
-  , update
-  , view
-  )
-  where
+module Hand where
 
 import Card exposing (..)
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html exposing (Html, div)
 
 -- MODEL
 
