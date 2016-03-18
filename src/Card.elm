@@ -1,16 +1,17 @@
-module Card
-  ( Card
-  , init
-  , view
-  , update
-  , Suit(..)
-  , Value(..)
-  , Face(..)
-  , Action
-  ) where
+module Card where
+  -- ( Card
+  -- , init
+  -- , view
+  -- , update
+  -- , Suit(..)
+  -- , Value(..)
+  -- , Face(..)
+  -- , Action
+  -- ) where
 
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
 import String exposing (toLower)
 
 -- MODEL
@@ -62,8 +63,13 @@ flipOver f =
 view : Signal.Address Action -> Card -> Html
 view address model =
   div
-    [ toClass model |> class ]
-    [ text "" ]
+    [ toClass model |> class, onClick address Flip ]
+    ( List.map (text) (cardStrings model) )
+
+cardStrings : Card -> List String
+cardStrings card =
+  []
+  -- [toString card.face, toString card.suit, valueString card.value]
 
 toClass : Card -> String
 toClass model =

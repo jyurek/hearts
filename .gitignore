@@ -4,4 +4,7 @@ elm-stuff/
 # elm-repl generated files
 repl-temp-*
 
+styles/*.css
+styles/*.map
 .sass-cache
+hearts.js
