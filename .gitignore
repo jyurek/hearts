@@ -8,3 +8,5 @@ styles/*.css
 styles/*.map
 .sass-cache
 hearts.js
+extra
+extra/*
