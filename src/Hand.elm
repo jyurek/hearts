@@ -1,7 +1,8 @@
 module Hand where
 
 import Card exposing (..)
-import Html exposing (Html, div)
+import Html exposing (Html, div, text)
+import Html.Attributes exposing (class)
 
 -- MODEL
 
@@ -51,8 +52,15 @@ updateMatching matchId action (id, card) =
 view : Signal.Address Action -> Hand -> Html
 view address hand =
     div
-        []
-        (List.map (viewOne address) hand.cards)
+        [ class "hand" ]
+        [viewAll address hand.cards]
+        -- (List.map (viewOne address) hand.cards)
+
+viewAll : Signal.Address Action -> List (ID, Card) -> Html
+viewAll address cs = case cs of
+  [] -> text ""
+  [c] -> div [class "nest"] [viewOne address c]
+  (c::cs) -> div [class "nest"] [viewOne address c, viewAll address cs]
 
 viewOne : Signal.Address Action -> (ID, Card) -> Html
 viewOne address (id, card) =

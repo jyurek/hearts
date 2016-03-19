@@ -5,6 +5,18 @@ body {
   background-color: #808080;
 }
 
+.hand {
+  display: inline-block;
+  position: relative;
+  left: $card-width / 2;
+
+  .nest {
+    display: inline-block;
+    position: relative;
+    left: -1 * $card-width / 2;
+  }
+}
+
 .card {
   background-image: url(../images/StandardDeck.png);
   width: $card-width;
@@ -176,5 +188,3 @@ body {
   }
 
 }
-
-/* 168x242 */
