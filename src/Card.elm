@@ -7,8 +7,8 @@ import String
 
 -- MODEL
 
-type Suit = Spades | Hearts | Clubs | Diamonds
-type Value = Ace | King | Queen | Jack | Value Int
+type Suit = Spades | Hearts | Clubs | Diamonds | UnknownSuit
+type Value = Ace | King | Queen | Jack | Value Int | UnknownValue
 type Face = Up | Down
 type alias Card =
   { face : Face
@@ -24,6 +24,7 @@ valueString v =
     Queen -> "queen"
     Jack -> "jack"
     Value i -> toString i
+    UnknownValue -> "unknown-value"
 
 init : Face -> Value -> Suit -> Card
 init f v s =
@@ -41,7 +42,13 @@ update : Action -> Card -> Card
 update action model =
   case action of
     Flip ->
-      { model | face = flipOver model.face }
+      { model | face = if canFlip model
+                         then flipOver model.face
+                         else model.face }
+
+canFlip : Card -> Bool
+canFlip card =
+  not ((card.suit == UnknownSuit || card.value == UnknownValue) && card.face == Down)
 
 flipOver : Face -> Face
 flipOver f =
@@ -54,7 +61,7 @@ flipOver f =
 view : Signal.Address Action -> Card -> Html
 view address model =
   div
-    [ toClass model |> class, onClick address Flip ]
+    [ class <| toClass model, onClick address Flip ]
     ( List.map (text) (cardStrings model) )
 
 cardStrings : Card -> List String

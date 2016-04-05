@@ -17,6 +17,7 @@ init =
   { cards = [ (0, Card Down Ace Hearts)
             , (1, Card Up Ace Spades)
             , (2, Card Up (Value 2) Diamonds)
+            , (3, Card Down UnknownValue UnknownSuit)
             ]
   , nextID = 3
   }

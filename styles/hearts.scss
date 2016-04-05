@@ -3,17 +3,50 @@ $card-width: 71px;
 
 body {
   background-color: #808080;
+  font-size: 12p
+}
+
+.player {
+  display: inline-block;
+  font-family: Sans-Serif;
+  padding: 5px;
+  position: relative;
+
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
 }
 
 .hand {
   display: inline-block;
-  position: relative;
-  left: $card-width / 2;
+  float: left;
 
   .nest {
     display: inline-block;
     position: relative;
-    left: -1 * $card-width / 2;
+  }
+}
+
+.horizontal .nest {
+  left: $card-width / -2;
+
+  &:first-child {
+    left: 0px;
+  }
+}
+
+.vertical .nest {
+  top: $card-height / 2;
+  left: -1 * $card-width;
+
+  &:first-child {
+    left: 0px;
+    top: 0px;
   }
 }
 
