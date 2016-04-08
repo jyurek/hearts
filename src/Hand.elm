@@ -14,10 +14,10 @@ type alias ID = Int
 
 init : Hand
 init =
-  { cards = [ (0, Card Down Ace Hearts)
-            , (1, Card Up Ace Spades)
-            , (2, Card Up (Value 2) Diamonds)
-            , (3, Card Down UnknownValue UnknownSuit)
+  { cards = [ (0, Card.init Down Ace Hearts)
+            , (1, Card.init Up Ace Spades)
+            , (2, Card.init Up (Value 2) Diamonds)
+            , (3, Card.initUnknownCard)
             ]
   , nextID = 3
   }

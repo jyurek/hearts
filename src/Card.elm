@@ -7,14 +7,10 @@ import String
 
 -- MODEL
 
-type Suit = Spades | Hearts | Clubs | Diamonds | UnknownSuit
-type Value = Ace | King | Queen | Jack | Value Int | UnknownValue
+type Suit = Spades | Hearts | Clubs | Diamonds
+type Value = Ace | King | Queen | Jack | Value Int
 type Face = Up | Down
-type alias Card =
-  { face : Face
-  , value : Value
-  , suit : Suit
-  }
+type Card = Card { face : Face, value : Value, suit : Suit } | UnknownCard
 
 valueString : Value -> String
 valueString v =
@@ -24,14 +20,12 @@ valueString v =
     Queen -> "queen"
     Jack -> "jack"
     Value i -> toString i
-    UnknownValue -> "unknown-value"
 
 init : Face -> Value -> Suit -> Card
-init f v s =
-  { face = f
-  , value = v
-  , suit = s
-  }
+init f v s = Card { face = f , value = v , suit = s }
+
+initUnknownCard : Card
+initUnknownCard = UnknownCard
 
 -- UPDATE
 
@@ -40,15 +34,18 @@ type Action
 
 update : Action -> Card -> Card
 update action model =
-  case action of
-    Flip ->
-      { model | face = if canFlip model
-                         then flipOver model.face
-                         else model.face }
+  case model of
+    UnknownCard -> UnknownCard
+    Card card -> 
+      case action of
+        Flip ->
+          Card { card | face = flipOver card.face }
 
 canFlip : Card -> Bool
 canFlip card =
-  not ((card.suit == UnknownSuit || card.value == UnknownValue) && card.face == Down)
+  case card of
+    UnknownCard -> False
+    _ -> True
 
 flipOver : Face -> Face
 flipOver f =
@@ -59,10 +56,10 @@ flipOver f =
 -- VIEW
 
 view : Signal.Address Action -> Card -> Html
-view address model =
+view address card =
   div
-    [ class <| toClass model, onClick address Flip ]
-    ( List.map (text) (cardStrings model) )
+    [ class <| toClass card, onClick address Flip ]
+    ( List.map (text) (cardStrings card) )
 
 cardStrings : Card -> List String
 cardStrings card =
@@ -70,12 +67,16 @@ cardStrings card =
   -- [toString card.face, toString card.suit, valueString card.value]
 
 toClass : Card -> String
-toClass model =
-  case model.face of
-    Up ->
-      "card "
-      ++ (model.suit |> toString |> String.toLower)
-      ++ "-"
-      ++ (model.value |> valueString)
-    Down ->
+toClass card =
+  case card of
+    UnknownCard ->
       "card down"
+    Card card' ->
+      case card'.face of
+        Up ->
+          "card "
+          ++ (card'.suit |> toString |> String.toLower)
+          ++ "-"
+          ++ (card'.value |> valueString)
+        Down ->
+          "card down"
