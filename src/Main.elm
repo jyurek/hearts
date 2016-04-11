@@ -1,10 +1,12 @@
-import Player exposing (..)
-import Hand exposing (..)
-import Card exposing (..)
+module Main where
+
+import Hand.Model
+import Hand.Update
+import Hand.View
 import StartApp.Simple exposing (start)
 
 main = start
-  { model = Player.init
-  , update = Player.update
-  , view = Player.view
+  { model = Hand.Model.fullDeck
+  , update = Hand.Update.update
+  , view = Hand.View.view
   }
