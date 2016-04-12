@@ -9,9 +9,9 @@ import Html.Attributes exposing (class)
 view : Signal.Address Action -> Model -> Html
 view address hand =
     div
-        [ class "hand" ]
-        [ viewAll address hand.cards ]
-        -- (List.map (viewOne address) hand.cards)
+        [ class "hand horizontal" ]
+        -- [ viewAll address hand.cards ]
+        (List.map (viewOne address) hand.cards)
 
 viewAll : Signal.Address Action -> List OrderedCard -> Html
 viewAll address cs = case cs of

@@ -7,46 +7,32 @@ body {
 }
 
 .player {
-  display: inline-block;
   font-family: Sans-Serif;
-  padding: 5px;
   position: relative;
-
-  &:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-  }
 }
 
 .hand {
   display: inline-block;
-  float: left;
+  border: 1px solid red;
+}
 
-  .nest {
-    display: inline-block;
-    position: relative;
+.horizontal .card {
+  margin-left: $card-width / -2;
+
+  &:first-child {
+    margin-left: 0;
   }
 }
 
-.horizontal .nest {
-  left: $card-width / -2;
-
-  &:first-child {
-    left: 0px;
-  }
+.hand.vertical {
+  width: $card-width;
 }
 
-.vertical .nest {
-  top: $card-height / 2;
-  left: -1 * $card-width;
+.vertical .card {
+  margin-top: $card-height / -2;
 
   &:first-child {
-    left: 0px;
-    top: 0px;
+    margin-top: 0;
   }
 }
 

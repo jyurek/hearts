@@ -19,5 +19,4 @@ cardStrings card =
   -- [toString card.face, toString card.suit, valueString card.value]
 
 toClass : Model -> String
-toClass card =
-  "card " ++ (cardString card)
+toClass = cardString

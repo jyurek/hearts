@@ -1,4 +1,4 @@
-module Hand.Model (Model, ID, OrderedCard, initialModel, fullDeck, smallHand) where
+module Hand.Model (Model, ID, OrderedCard, initialModel, subsetDeck) where
 
 import Card.Model exposing (Model(..), Suit(..), Value(..), Face(..))
 
@@ -15,16 +15,8 @@ initialModel =
   , nextID = 1
   }
 
-smallHand : Model
-smallHand =
-  { cards = [ (1, Card.Model.cardFromInteger 52 )
-            , (2, Card.Model.cardFromInteger 1 )
-            ]
-  , nextID = 3
-  }
-
-fullDeck : Model
-fullDeck =
-  { cards = List.map (\x -> (x, Card.Model.cardFromInteger x) ) [1..35]
+subsetDeck : List Int -> Model
+subsetDeck cardNumbers =
+  { cards = List.map (\x -> (x, Card.Model.cardFromInteger x) ) cardNumbers
   , nextID = 53
   }
