@@ -1,8 +1,8 @@
 module Player.Update where
 
-import Player.Model exposing (Model)
-import Hand.Update
 import Hand.Model
+import Hand.Update
+import Player.Model exposing (Model)
 
 type Action
  = SetHand Hand.Model.Model

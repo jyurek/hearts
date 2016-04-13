@@ -3,4 +3,10 @@ module Game.Model where
 import Player.Model
 import General exposing(ID)
 
-type Game = Game List Player.Model.Model | NoGame
+type Model
+  = Outside
+  | Lobby
+  | Playing
+
+initialModel : Model
+initialModel = Outside
