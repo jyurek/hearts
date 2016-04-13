@@ -7,13 +7,16 @@ body {
 }
 
 .player {
+  display: inline-block;
   font-family: Sans-Serif;
   position: relative;
+  background: white;
+  border: 1px solid black;
+  padding: 3px;
 }
 
 .hand {
   display: inline-block;
-  border: 1px solid red;
 }
 
 .horizontal .card {
@@ -24,7 +27,7 @@ body {
   }
 }
 
-.hand.vertical {
+.vertical {
   width: $card-width;
 }
 

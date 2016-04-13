@@ -1,12 +1,14 @@
 module Main where
 
-import Hand.Model
-import Hand.Update
-import Hand.View
+import Player.Model
+import Player.Update
+import Player.View
 import StartApp.Simple exposing (start)
+import Html exposing (Html)
 
+main : Signal Html
 main = start
-  { model = Hand.Model.subsetDeck [10..22]
-  , update = Hand.Update.update
-  , view = Hand.View.view
+  { model = Player.Model.initialModel
+  , update = Player.Update.update
+  , view = Player.View.view
   }

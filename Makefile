@@ -4,7 +4,7 @@ open: all
 	open index.html
 
 hearts.js: src/*.elm
-	elm-make src/Main.elm --output=hearts.js
+	elm-make src/Main.elm --output=hearts.js --warn
 
 styles/hearts.css: styles/hearts.scss
 	scss styles/hearts.scss styles/hearts.css

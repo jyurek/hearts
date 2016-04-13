@@ -1,13 +1,13 @@
-module Hand.Model (Model, ID, OrderedCard, initialModel, subsetDeck) where
+module Hand.Model (Model, OrderedCard, initialModel, subsetDeck) where
 
 import Card.Model exposing (Model(..), Suit(..), Value(..), Face(..))
+import General exposing (ID)
 
 type alias OrderedCard = (ID, Card.Model.Model)
 type alias Model = 
   { cards : List OrderedCard
   , nextID : ID
   }
-type alias ID = Int
 
 initialModel : Model
 initialModel =

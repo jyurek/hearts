@@ -2,7 +2,8 @@ module Hand.Update where
 
 import Card.Model
 import Card.Update
-import Hand.Model exposing (ID, OrderedCard, Model)
+import Hand.Model exposing (OrderedCard, Model)
+import General exposing (ID)
 
 type Action
   = Insert Card.Model.Model
@@ -27,4 +28,3 @@ updateMatching matchId action (id, card) =
   if matchId == id
      then (id, Card.Update.update action card)
      else (id, card)
-

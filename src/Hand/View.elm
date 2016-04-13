@@ -9,7 +9,7 @@ import Html.Attributes exposing (class)
 view : Signal.Address Action -> Model -> Html
 view address hand =
     div
-        [ class "hand horizontal" ]
+        [ class "hand" ]
         -- [ viewAll address hand.cards ]
         (List.map (viewOne address) hand.cards)
 
