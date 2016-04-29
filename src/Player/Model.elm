@@ -2,25 +2,16 @@ module Player.Model where
 
 import Hand.Model
 import General exposing (ID)
-import String exposing (toLower)
 
-type Orientation = Vertical | Horizontal
 type alias Model =
   { hand : Hand.Model.Model
   , name : String
-  , orientation : Orientation
+  , score : Int
   }
 
 initialModel : Model
 initialModel = 
-  { hand = Hand.Model.subsetDeck [11..23]
+  { hand = Hand.Model.initialModel
   , name = "Player"
-  , orientation = Horizontal
+  , score = 0
   }
-
-orientationString : Orientation -> String
-orientationString = toString >> toLower
-
-playerString : Model -> String
-playerString player =
-  "player " ++ (orientationString player.orientation)

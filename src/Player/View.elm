@@ -1,34 +1,42 @@
-module Player.View where
+module Player.View (view, missingView) where
 
 import Hand.View
 import Player.Update exposing (Action(..))
-import Player.Model exposing (Model, Orientation(..))
+import Player.Model exposing (Model)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class, attribute)
 
 view : Signal.Address Action -> Model -> Html
 view address player =
   div
-    [ playerClass player
-    , playerNameAtrribute player
+    [ playerClass
+    , playerNameAtrribute player.name
     ]
-    [ playerNameLabel player
+    [ playerNameLabel player.name
     , handView address player
     ]
 
-playerClass : Model -> Html.Attribute
-playerClass player =
-  class <| Player.Model.playerString player
+missingView : Html
+missingView =
+  div
+    [ playerClass
+    , playerNameAtrribute "Waiting..."
+    ]
+    [ playerNameLabel "Waiting for player." ]
 
-playerNameAtrribute : Model -> Html.Attribute
-playerNameAtrribute player =
-  attribute "data-name" player.name
+playerClass : Html.Attribute
+playerClass =
+  class "player"
 
-playerNameLabel : Model -> Html
-playerNameLabel player =
+playerNameAtrribute : String -> Html.Attribute
+playerNameAtrribute playerName =
+  attribute "data-name" playerName
+
+playerNameLabel : String -> Html
+playerNameLabel playerName =
   div
     [ class "name" ]
-    [ text player.name ]
+    [ text playerName ]
 
 handView : Signal.Address Action -> Model -> Html
 handView address player =

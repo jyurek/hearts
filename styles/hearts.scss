@@ -1,25 +1,37 @@
 $card-height: 96px;
 $card-width: 71px;
+$hand-padding: 3px;
+$font-size: 12px;
 
 body {
   background-color: #808080;
-  font-size: 12p
+  font-size: $font-size;
 }
 
 .player {
-  display: inline-block;
-  font-family: Sans-Serif;
-  position: relative;
   background: white;
   border: 1px solid black;
-  padding: 3px;
+  display: inline-block;
+  font-family: Sans-Serif;
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  vertical-align: top;
+
+  .name {
+    font-size: $font-size;
+    line-height: $font-size * 1.25;
+    padding: $hand-padding;
+    color: white;
+    background-color: green;
+  }
 }
 
 .hand {
-  display: inline-block;
+  padding: $hand-padding;
 }
 
-.horizontal .card {
+.card {
   margin-left: $card-width / -2;
 
   &:first-child {
@@ -28,10 +40,11 @@ body {
 }
 
 .vertical {
-  width: $card-width;
+  width: $card-width + ($hand-padding * 2);
 }
 
 .vertical .card {
+  margin-left: 0;
   margin-top: $card-height / -2;
 
   &:first-child {
